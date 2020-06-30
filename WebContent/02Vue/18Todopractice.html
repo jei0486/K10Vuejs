@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18TodoApppractice.html</title>
+ <!-- JQuery CDN -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <!-- development version, includes helpful console warnings -->
+ <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<link rel="stylesheet" href="./css/todo.css">
+<script>
+    $(function(){
+	var v1 = new Vue({
+    el:'#todolistapp',
+	data : {
+		title :'ToDo List App',
+        todo:'',
+		todolist :[
+		{todo:'여행가기' , done: false},
+		{todo:'자취방 구하기' , done:false},
+		{todo:'물놀이 가기' , done:false},
+		{todo:'운동 60분' , done:false},
+		{todo:'집에 가만히 있기' , done:true}
+		]
+	},
+    methods : {
+        checked:function(done){
+            if(done){
+                return {checked:true};
+            }
+            else{
+                return {checked:false};
+            }
+        },
+        dataToggle : function(index){
+            this.todolist[index].done = !this.todolist[index].done;
+        },
+        deleteTo : function(index){
+            this.todolist.splice(index,1)
+        },
+        addTodo : function(){
+            if(this.todo!=''){
+                this.todolist.push({todo:this.todo, done:false }); 
+                this.todo='';
+            }
+        } 
+
+    }
+	});
+});
+</script>  
+</head>
+<body>
+
+    <div id="todolistapp">
+      <div id="header" class="header">
+       <h2>{{title}}</h2>
+  
+       <input class="input" type="text" id="task" v-model="todo" @keyup.enter="addTodo"
+             placeholder="입력 후 엔터!">
+       <span class="addbutton" @click="addTodo">추 가</span>
+      </div>
+  
+      <ul id="todolist" >
+          <li v-for="(a,index) in todolist" :class="checked(a.done)" v-on:click="dataToggle(index)">
+              <span>{{a.todo}}</span>
+              <span v-if="a.done">(완 료)</span>
+              <span class="close" @click="deleteTo(index)">&#x00D7;</span>
+          </li>
+          
+      </ul> 
+    </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05Dir_vshow02Quiz.html</title>
+ <!-- JQuery CDN -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <!-- development version, includes helpful console warnings -->
+ <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+ <script>
+ $(function(){
+         var vue = new Vue({
+             el:'#app',
+             data:{
+                 title : '[퀴즈] : v-show를 이용한 입장료 계산',
+                 age : 0,
+                 price : 50000
+             }
+          });
+     });
+  </script>
+</head>
+<body>
+
+  <div id="app">
+     <h2>{{title}}</h2>
+     나이입력 : <input type="number" step="5" v-model="age">
+     <!-- v-if의 경우 조건에 만족하는 DOM요소만 화면에 랜더링 함 -->
+     <p>
+     <span v-if="age<=0">나이는 양수로 입력</span>
+     <span v-else-if="isNaN(age)">나이는 숫자로 입력</span>
+     <span v-else-if='age<4 || age>=65'>무료입장 : {{price-(price*1.0)}}원</span>
+     <span v-else-if='age<=7'>유아 50%할인 : {{price-(price*0.5)}}원</span>
+     <span v-else-if='age<=19'>청소년 30% 할인 : {{price-(price*0.3)}}원</span>
+     <span v-else>일반입장 : {{price}}</span>
+   </p>
+   <!-- v-show의 경우 일단 렌더링은 진행되고 , 조건에 만족할때만 노출됨 -->
+     <img v-show='age<4 || age>=65 'src="./img/free_admission.jpg" width="100" >
+  </div>
+    
+</body>
+</html>

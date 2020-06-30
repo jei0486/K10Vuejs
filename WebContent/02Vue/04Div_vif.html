@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04Div_vif.html</title>
+
+ <!-- JQuery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+   /* 
+        v-if 디렉티브
+        1.조건에 부합되는 내용을 렌더링하고, 부합되지않으면 렌더링 하지않는 디렉티브
+        2. 형식
+            요소객체 v-if="model 의 boolean 값"
+                v-else-if...
+                v-else ...  
+
+    rendering은 renderer engine(skia)이 합니다
+    Render는 html로 입력받아 해석해서 표준 출력 장치(모니터)로 출력 해 줍니다
+    위 작업을 Rendering이라고 합니다
+    React입장에서 rendering은 data를 html로 변환해서 renderer에게 전달하는 일관 작업을 뜻 합니다        
+    */ 
+    $(function(){
+            var vue = new Vue({
+                el:'#app',
+                data:{
+                    title : '디렉티브 :v-if',
+                    age:0
+                }
+             });
+        });
+     </script>
+</head>
+<body>
+
+     <div id="app">
+        <h2>{{title}}</h2>
+        나이를 입력하시면 학부과정을 출력합니다.
+        <div>
+            나이: <input type="text" v-model='age' > 
+        </div>
+        <br>
+        {{age}} 살은
+        <b>
+            <span v-if='age<8'>유아</span>
+            <span v-else-if='age>=8 && age<=13'>초등학생</span>
+            <span v-else-if='age>=14 && age<=16'>중학생</span>
+            <span v-else-if='age>=17 && age<=19'>고등학생</span>
+            <span v-else-if='age>=20 && age<=60'>대학생&성인</span>
+            <span v-else>노인</span>
+        </b>
+        입니다.
+
+     </div>
+    
+</body>
+</html>

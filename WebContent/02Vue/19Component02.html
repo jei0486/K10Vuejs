@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>19Component02.html</title>
+    <!-- JQuery CDN -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <!-- development version, includes helpful console warnings -->
+ <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+ <script>
+     Vue.component('global-component',{
+         template : '<div>전역 컴포넌트</div>'
+     });
+
+     var local_comp={
+        template : '<div>지역 컴포넌트</div>'
+     }
+     
+     $(function(){
+            var v1 = new Vue({
+                el:'#app',
+                components:{
+                    'local_component':local_comp
+                }
+            });
+            var v2 = new Vue({
+                /* 
+                지역 컴포넌트를 등록하지 않으면 오류 발생됨
+                콘솔에서 확인 유효범위가 다르기 때문임
+                 */
+                el:'#app2'
+                // , components:{
+                //     'local_component':local_comp
+                // }
+            });
+     });
+ </script>
+</head>
+<body>
+    <div id="app">
+        <h2>첫번째 인스턴스 지역</h2>
+        <global-component></global-component>
+        <local_component></local_component>
+    </div> 
+
+    <hr/>   
+
+    <div id="app2">
+        <h2>두번째 인스턴스 지역</h2>
+        <global-component></global-component>
+       <!--  <local_component></local_component> -->
+    </div>    
+
+
+</body>
+</html>
