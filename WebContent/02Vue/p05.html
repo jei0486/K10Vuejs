@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- JQuery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- development version, includes helpful console warnings -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+   
+    
+
+    <script>
+    
+        Vue.component('component-table', {
+            template : '#tpl-table',
+            props : {
+                contact_array : {
+                    type : Array
+                }
+            }
+        });
+        
+        $(function(){
+            var vue = new Vue({
+                el : "#container",
+                data : {
+                    title : "템플릿과 컴포넌트를 이용한 전화번호부",
+                    contacts : [
+                        { "no": 100,"name": "설현", "tel": "010-3456-8299", "address": "서울" },
+                        { "no": 99, "name": "혜리", "tel": "010-3456-8298", "address": "서울" },
+                        { "no": 98, "name": "하니", "tel": "010-3456-8297", "address": "경기" },
+                        { "no": 97, "name": "성소", "tel": "010-3456-8296", "address": "제주" },
+                        { "no": 96, "name": "지아", "tel": "010-3456-8295", "address": "서울" },
+                        { "no": 95, "name": "정연", "tel": "010-3456-8294", "address": "강원" },
+                        { "no": 94, "name": "쯔위", "tel": "010-3456-8293", "address": "경기" },
+                        { "no": 93, "name": "사나", "tel": "010-3456-8292", "address": "서울" },
+                        { "no": 92, "name": "모모", "tel": "010-3456-8291", "address": "충남" },
+                        { "no": 91, "name": "소진", "tel": "010-3456-8290", "address": "서울" }
+                    ]
+                }
+            });
+        });
+        </script>
+
+    <template id="tpl-table">
+        <table border="1" style="width: 400px;">	
+        <tbody>
+            <tr>
+                <th>No</th>
+                <th>이름</th>
+                <th>전화번호</th>
+                <th>거주지</th>
+            </tr>
+            <!-- 코드삽입 -->
+            <tr v-for='(contact,index) in contacts' >
+                <td>{{contact.no}}</td>
+                <td>{{contact.name}}</td>
+                <td>{{contact.tel}}</td>
+                <td>{{contact.address}}</td>
+            </tr>
+        </tbody>
+        </table>
+    </template>
+    
+	<div id="container">
+        <h2>{{ title }}</h2>
+        <!-- 코드삽입 -->
+        <component-table  v-on:contact_array="tpl-table"></component-table>
+    </div>
+
+    
+</body>
+
+</html>
